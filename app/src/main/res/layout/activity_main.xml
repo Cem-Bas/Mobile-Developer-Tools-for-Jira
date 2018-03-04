@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+        <LinearLayout
+            android:id="@+id/mainHeading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.daimajia.androidviewhover.BlurLayout
+                android:id="@+id/blurLayoutSendfileBox"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/source"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/file_bg" />
+
+                <TextView
+                    android:id="@+id/sendFileText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/album_SheetBackground"
+                    android:backgroundTintMode="src_over"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="Files"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="italic" />
+
+            </com.daimajia.androidviewhover.BlurLayout>
+
+            <com.daimajia.androidviewhover.BlurLayout
+                android:id="@+id/blur_layout_send_comment"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/source2"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/comment_bg" />
+
+                <TextView
+                    android:id="@+id/sendFileText2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/album_SheetBackground"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="Comments"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="italic" />
+            </com.daimajia.androidviewhover.BlurLayout>
+
+            <com.daimajia.androidviewhover.BlurLayout
+                android:id="@+id/blur_layout_view_ticket"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/source3"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/webview_bg" />
+
+                <TextView
+                    android:id="@+id/sendFileText3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/album_SheetBackground"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="Tickets"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="italic" />
+            </com.daimajia.androidviewhover.BlurLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/material_design_android_floating_action_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="0"
+        fab:menu_animationDelayPerItem="55"
+        fab:menu_backgroundColor="@android:color/transparent"
+        fab:menu_buttonSpacing="0dp"
+        fab:menu_colorNormal="@android:color/transparent"
+        fab:menu_colorPressed="@android:color/transparent"
+        fab:menu_colorRipple="#99d4d4d4"
+        fab:menu_fab_label="Settings Menu"
+        fab:menu_fab_size="normal"
+        fab:menu_icon="@drawable/wrench"
+        fab:menu_labels_colorNormal="#333"
+        fab:menu_labels_colorPressed="#444"
+        fab:menu_labels_colorRipple="#66efecec"
+        fab:menu_labels_cornerRadius="3dp"
+        fab:menu_labels_ellipsize="none"
+        fab:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+        fab:menu_labels_margin="0dp"
+        fab:menu_labels_maxLines="-1"
+        fab:menu_labels_padding="8dp"
+        fab:menu_labels_position="left"
+        fab:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+        fab:menu_labels_showShadow="true"
+        fab:menu_labels_singleLine="false"
+        fab:menu_labels_textColor="#f2f1f1"
+        fab:menu_labels_textSize="15sp"
+        fab:menu_openDirection="up"
+        fab:menu_shadowColor="#66ffa5ac"
+        fab:menu_shadowRadius="4dp"
+        fab:menu_shadowXOffset="1dp"
+        fab:menu_shadowYOffset="4dp"
+        fab:menu_showShadow="true"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="11dp">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/material_design_floating_action_menu_item1"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/jira"
+            fab:fab_label="Jira Credentials"
+            fab:fab_size="mini"
+
+            />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/material_design_floating_action_menu_item2"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/about"
+            fab:fab_label="About"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+    </RelativeLayout>

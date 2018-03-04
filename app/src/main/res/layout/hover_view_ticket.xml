@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/animation_area"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:id="@+id/ticketIconView"
+            android:src="@drawable/ic_action_globe"
+            android:layout_width="55dp"
+            android:layout_height="55dp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/descriptionViewTicket"
+        android:background="#66000000"
+        android:text="Launch a webview of the ticket"
+        android:layout_marginLeft="12dp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
