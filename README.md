@@ -9,8 +9,8 @@ Mobile Development Tools for Jira
 
 ## Built With
 
-* [Kotlin](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Retrofit 2.0](https://maven.apache.org/) - Dependency Management
+* [Kotlin](https://kotlinlang.org/) - Programming Language
+* [Retrofit 2.0](http://square.github.io/retrofit/) - REST API Management
 
 ## Version
 
