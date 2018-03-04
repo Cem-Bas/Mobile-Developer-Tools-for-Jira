@@ -40,14 +40,11 @@ class SendComment : AsyncTask<String, String, String>() {
             return service.add(credentials, token, ticketNumber, commentBody)
         }
 
-        Log.d("COMMENT LOGS", "BEFORE2")
-
+        try {
         val response = makeComment().execute()
-
-        Log.d("COMMENT LOGS", "AFTER2")
-
-        val responseCode = response.code().toString()
-
-        return responseCode}
+        } catch (e: Throwable){
+            return status.toString()
+        }
+        return status.toString()}
 
 }

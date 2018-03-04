@@ -46,12 +46,11 @@ class SendVideo : AsyncTask<String, String, String>() {
 
         val call: Call<List<Response2>> = service.add(credentials, token, ticketNumber, multi)
 
-        val response = call.execute()
-
-        Log.d("RESPONSE", response.raw().toString())
-
-        val responseCode = response.code().toString()
-
-        return responseCode}
+        try {
+            val response = call.execute()
+        } catch (e: Throwable){
+            return status.toString()
+        }
+        return status.toString()}
 
 }

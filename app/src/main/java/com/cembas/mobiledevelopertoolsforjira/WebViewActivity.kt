@@ -12,10 +12,14 @@ import android.system.Os.link
 import com.cembas.mobiledevelopertoolsforjira.R.id.webView
 import android.webkit.WebViewClient
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.content.SharedPreferences
 import android.view.inputmethod.InputMethodManager
 
 
 class WebViewActivity : AppCompatActivity() {
+
+    val SHARED_PREF_FILE = "com.cembas.mobiledevelopertoolsforjira.appdata"
+    var preffs: SharedPreferences? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,9 @@ class WebViewActivity : AppCompatActivity() {
 
         var webView: WebView = findViewById(R.id.webView)
 
+        preffs = this.getSharedPreferences(SHARED_PREF_FILE, 0)
+
+
         goButton.setOnClickListener {
 
             val ticketNumberValue: String = jiraTicketNumber.text.toString()
@@ -34,7 +41,13 @@ class WebViewActivity : AppCompatActivity() {
             val webView = WebView(this)
             webView.settings.javaScriptEnabled = true
             webView.webViewClient = WebViewClient()
-            webView.loadUrl("https://jiradevtools.atlassian.net/browse/"+ticketNumberValue)
+
+            val jiraAddressPreffs = preffs?.getString("JiraAddress", "")
+
+            val baseUrl = "https://"+jiraAddressPreffs
+
+
+            webView.loadUrl(baseUrl+"/browse/"+ticketNumberValue)
             setContentView(webView)
 
             jiraTicketNumber.inputType = 0
