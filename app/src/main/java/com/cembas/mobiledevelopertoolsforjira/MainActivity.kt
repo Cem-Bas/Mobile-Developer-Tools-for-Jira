@@ -2,8 +2,10 @@ package com.cembas.mobiledevelopertoolsforjira
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -182,24 +184,13 @@ class MainActivity : AppCompatActivity() {
     private val PICK_IMAGE_MULTIPLE = 1
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        val uri = data?.data
+        val uri: Uri = data?.data
 
-        val intent = Intent(this@MainActivity, IntentHandler::class.java)
-        intent.putExtra("imageUri", uri)
+        val intent = Intent(this, IntentHandler::class.java)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
         startActivity(intent)
-
-/*            try {
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-                // Log.d(TAG, String.valueOf(bitmap));
-
-                val imageView = findViewById<View>(R.id.imageView) as ImageView
-                imageView.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }*/
-
     }
 }

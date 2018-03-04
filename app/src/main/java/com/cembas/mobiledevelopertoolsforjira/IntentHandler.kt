@@ -82,9 +82,6 @@ class IntentHandler : AppCompatActivity() {
                         handleSendImage(intentUri, realPath)
                     }
                 }
-            } else {
-                val intent = Intent(this@IntentHandler, MainActivity::class.java)
-                startActivity(intent)
             }
             }
     }
