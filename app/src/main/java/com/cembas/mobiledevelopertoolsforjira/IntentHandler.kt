@@ -64,6 +64,7 @@ class IntentHandler : AppCompatActivity() {
                 val action = intent.action
                 val type = intent.type
 
+            if (intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) != null) {
                 val intentUri = intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as Uri
 
                 Log.d("URI PATH 1", intentUri.toString())
@@ -81,6 +82,10 @@ class IntentHandler : AppCompatActivity() {
                         handleSendImage(intentUri, realPath)
                     }
                 }
+            } else {
+                val intent = Intent(this@IntentHandler, MainActivity::class.java)
+                startActivity(intent)
+            }
             }
     }
 
