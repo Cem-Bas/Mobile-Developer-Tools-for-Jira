@@ -1,6 +1,7 @@
 package com.cembas.mobiledevelopertoolsforjira
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -8,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.os.Parcelable
+import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -29,6 +31,11 @@ class IntentHandler : AppCompatActivity() {
     val SHARED_PREF_FILE = "com.cembas.mobiledevelopertoolsforjira.appdata"
     var preffs: SharedPreferences? = null
 
+    var mContext: Context? = null
+    val PICK_IMAGE_REQUEST = 1
+    val PICK_FILE_REQUEST = 1
+    val PICK_VIDEO_REQUEST = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intent_handler)
@@ -36,54 +43,58 @@ class IntentHandler : AppCompatActivity() {
         preffs = this.getSharedPreferences(SHARED_PREF_FILE, 0)
 
         try {
-                val intent = intent
-                val action = intent.action
-                val type = intent.type
 
-                val intentUri = intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as Uri
+            val intent = intent as Intent
 
-                Log.d("URI PATH 1", intentUri.toString())
+                val imageUri: Uri = intent.extras["imageUri"] as Uri
 
-                val realPath = GetPath.getRealPathFromUri(this, intentUri)
+                Log.d("URI PATH 1", imageUri.toString())
+
+                val realPath = GetPath.getRealPathFromUri(this, imageUri)
+
+                val intentUri = Uri.parse(realPath)
+
+            val cR = this@IntentHandler.contentResolver
+
+            val type = cR.getType(imageUri)
+
+            Log.d("URI PATH 1", type.toString())
+
+            if (type.startsWith("image/")) {
+                handleSendImage(intentUri, realPath)
+            } else  if (type.startsWith("video/")) {
+                handleSendVideo(intentUri, realPath)
+            }
 
                 Log.d("REAL PATH 1", realPath.toString())
-
-                when (Intent.ACTION_SEND == action && type != null) {
-                    "text/plain" == type -> handleSendText(intent)
-                    type.startsWith("image/")  -> handleSendImage(intentUri, realPath)
-                    type.startsWith("video/")  -> handleSendVideo(intentUri, realPath)
-                    type.startsWith("*/")  -> handleSendDocument(intentUri, realPath)
-                    else -> { // Note the block
-                        handleSendImage(intentUri, realPath)
-                    }
-                }
 
             } catch (e: Throwable) {
 
-                val intent = intent
-                val action = intent.action
-                val type = intent.type
+            val intent = intent as Intent
 
-            if (intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) != null) {
-                val intentUri = intent.getParcelableExtra<Parcelable>(Intent.EXTRA_STREAM) as Uri
+            val imageUri: Uri = intent.extras["imageUri"] as Uri
 
-                Log.d("URI PATH 1", intentUri.toString())
+            Log.d("URI PATH 1", imageUri.toString())
 
-                val realPath = GetPath.getRealPathFromUri(this, intentUri)
+            val realPath = GetPath.getRealPathFromUri(this, imageUri)
 
-                Log.d("REAL PATH 1", realPath.toString())
+            val intentUri = Uri.parse(realPath)
 
-                when (Intent.ACTION_SEND == action && type != null) {
-                    "text/plain" == type -> handleSendText(intent)
-                    type.startsWith("image/") -> handleSendImage(intentUri, realPath)
-                    type.startsWith("video/") -> handleSendVideo(intentUri, realPath)
-                    type.startsWith("*/") -> handleSendDocument(intentUri, realPath)
-                    else -> { // Note the block
-                        handleSendImage(intentUri, realPath)
-                    }
-                }
+            val cR = this@IntentHandler.contentResolver
+
+            val type = cR.getType(imageUri)
+
+            Log.d("URI PATH 1", type.toString())
+
+            if (type.startsWith("image/")) {
+                handleSendImage(intentUri, realPath)
+            } else  if (type.startsWith("video/")) {
+                handleSendVideo(intentUri, realPath)
             }
-            }
+
+            Log.d("REAL PATH 1", realPath.toString())
+
+        }
     }
 
     fun handleSendDocument(intentUri: Uri, realPath: String) {
@@ -167,12 +178,17 @@ class IntentHandler : AppCompatActivity() {
         }
     }
 
-    fun handleSendVideo(videoUris: Uri, realPath: String) {
+    fun handleSendVideo(videoUri: Uri, realPath: String) {
         var ticketNumberBox = findViewById<EditText>(R.id.ticketNumber)
 
-        if (videoUris != null) {
+        if (videoUri != null) {
             var videoView: VideoView = findViewById(R.id.videoView)
-            videoView.setVideoURI(videoUris)
+
+            var intentUri = Uri.parse(realPath)
+
+            handleSendImage(intentUri, realPath)
+
+            videoView.setVideoURI(videoUri)
             videoView.start()
 
             var sendButton = findViewById<View>(R.id.sendButton)
@@ -227,5 +243,30 @@ class IntentHandler : AppCompatActivity() {
         File("$dir/$file").printWriter().use {
             it.println("text")
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val cR = mContext?.contentResolver
+
+
+        val uri = data?.data as Uri
+
+        Log.d("URI TEST", uri.toString())
+
+        val intent = Intent(this, IntentHandler::class.java)
+        intent.putExtra("imageUri", uri)
+
+        val type = cR!!.getType(uri)
+
+        Log.d("URI TYPE TEST", type.toString())
+
+        if (type.startsWith("image/")) {
+            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        } else  if (type.startsWith("video/")) {
+            startActivityForResult(intent, PICK_VIDEO_REQUEST)
+        }
+
     }
 }

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +14,9 @@ import android.view.View
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.daimajia.androidviewhover.BlurLayout
+import android.content.ContentResolver
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -107,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                     .playOn(hoverSendFile)
 
             // Always show the chooser (if there are multiple options available)
-            val intentSendComment = Intent(this@MainActivity, TextHandler::class.java)
+            val intentSendComment = Intent(mContext, TextHandler::class.java)
             startActivity(intentSendComment)
         }
 
@@ -128,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             YoYo.with(Techniques.Hinge)
                     .duration(550)
                     .playOn(hoverViewTicket)
-            val intent = Intent(this@MainActivity, WebViewActivity::class.java)
+            val intent = Intent(mContext, WebViewActivity::class.java)
             startActivity(intent)
 
         }
@@ -146,7 +150,7 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton1.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 //TODO something when floating action menu first item clicked
-                val intent = Intent(this@MainActivity, JiraCredentials::class.java)
+                val intent = Intent(mContext, JiraCredentials::class.java)
                 startActivity(intent)
 
             }
@@ -155,7 +159,7 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton2.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 //TODO something when floating action menu third item clicked
-                val intent = Intent(this@MainActivity, About::class.java)
+                val intent = Intent(mContext, About::class.java)
                 startActivity(intent)
 
             }
@@ -187,10 +191,25 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        val uri: Uri = data?.data
+        val cR = mContext?.contentResolver
+
+
+        val uri = data?.data as Uri
+
+        Log.d("URI TEST", uri.toString())
 
         val intent = Intent(this, IntentHandler::class.java)
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-        startActivity(intent)
+        intent.putExtra("imageUri", uri)
+
+        val type = cR!!.getType(uri)
+
+        Log.d("URI TYPE TEST", type.toString())
+
+        if (type.startsWith("image/")) {
+            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+            
+        } else  if (type.startsWith("video/")) {
+            startActivityForResult(intent, PICK_VIDEO_REQUEST)
+        }
     }
 }
