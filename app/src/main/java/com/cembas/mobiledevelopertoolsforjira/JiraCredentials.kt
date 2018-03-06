@@ -22,6 +22,8 @@ class JiraCredentials : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jira_credentials)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
     var jiraAddressEdit: EditText = findViewById(R.id.jiraaddress)
 

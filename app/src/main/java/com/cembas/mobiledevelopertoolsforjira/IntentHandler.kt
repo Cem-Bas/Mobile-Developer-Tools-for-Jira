@@ -40,6 +40,8 @@ class IntentHandler : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intent_handler)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         preffs = this.getSharedPreferences(SHARED_PREF_FILE, 0)
 
         try {

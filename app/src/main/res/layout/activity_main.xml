@@ -5,11 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
     tools:context=".MainActivity">
+
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scrollbars="vertical">
+
         <LinearLayout
             android:id="@+id/mainHeading"
             android:layout_width="match_parent"
@@ -21,8 +24,8 @@
             <com.daimajia.androidviewhover.BlurLayout
                 android:id="@+id/blurLayoutSendfileBox"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
 
                 <ImageView
                     android:id="@+id/source"
@@ -52,8 +55,8 @@
             <com.daimajia.androidviewhover.BlurLayout
                 android:id="@+id/blur_layout_send_comment"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
 
                 <ImageView
                     android:id="@+id/source2"
@@ -81,8 +84,8 @@
             <com.daimajia.androidviewhover.BlurLayout
                 android:id="@+id/blur_layout_view_ticket"
                 android:layout_width="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
 
                 <ImageView
                     android:id="@+id/source3"
@@ -169,4 +172,4 @@
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>
-    </RelativeLayout>
+</RelativeLayout>

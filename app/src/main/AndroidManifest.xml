@@ -24,6 +24,7 @@
         </activity>
         <activity
             android:name=".IntentHandler"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -34,13 +35,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".JiraCredentials"
-                  android:windowSoftInputMode="stateVisible|adjustResize"/>
+                android:parentActivityName=".MainActivity"
+                android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".TextHandler"
+            android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity android:name=".About" />
-        <activity android:name=".VideoHandler" />
-        <activity android:name=".WebViewActivity"/>
+        <activity android:name=".About"
+            android:parentActivityName=".MainActivity"
+            />
+        <activity android:name=".VideoHandler"
+            android:parentActivityName=".MainActivity"
+            />
+        <activity android:name=".WebViewActivity"
+            android:parentActivityName=".MainActivity"
+            />
     </application>
 
 </manifest>

@@ -29,6 +29,8 @@ class TextHandler : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom_text)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         var addComment: Button = findViewById(R.id.addComment)
 
         var ticketBody: EditText = findViewById(R.id.ticket)

@@ -28,6 +28,8 @@ class VideoHandler : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_handler)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         var ticketNumberBox = findViewById<EditText>(R.id.ticketNumberVideo)
 
         var attOnlyButton = findViewById<View>(R.id.addVideo)

@@ -15,7 +15,8 @@ import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.daimajia.androidviewhover.BlurLayout
 import android.content.ContentResolver
-
+import android.support.v7.app.ActionBar
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         //if returning user show MainActivity
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        supportActionBar?.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        supportActionBar?.setCustomView(R.layout.abs_layout);
 
 
         var floatingActionButton1 = findViewById<View>(R.id.material_design_floating_action_menu_item1)
@@ -74,16 +78,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         hoverSendFile.findViewById<View>(R.id.documentIconView).setOnClickListener {
-            YoYo.with(Techniques.Hinge)
+            YoYo.with(Techniques.Tada)
                     .duration(550)
                     .playOn(hoverSendFile)
 
-                     val intent = Intent()
-                     // Show only images, no videos or anything else
-                     intent.type = "*/*"
-                     intent.action = Intent.ACTION_PICK
+            Toast.makeText(this, "This feature will be added soon.",
+                    Toast.LENGTH_LONG).show()
 
-                    startActivityForResult(Intent.createChooser(intent, "Select Document"), PICK_FILE_REQUEST)
+
+              //       val intent = Intent()
+              //       // Show only images, no videos or anything else
+              //       intent.type = "*/*"
+              //       intent.action = Intent.ACTION_PICK
+
+              //      startActivityForResult(Intent.createChooser(intent, "Select Document"), PICK_FILE_REQUEST)
         }
 
         sendFileBoxLayout.setHoverView(hoverSendFile)

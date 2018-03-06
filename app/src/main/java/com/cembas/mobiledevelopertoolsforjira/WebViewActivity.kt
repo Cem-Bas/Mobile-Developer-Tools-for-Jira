@@ -25,6 +25,8 @@ class WebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         var jiraTicketNumber: EditText = findViewById(R.id.jiraTicketNumber)
 
         var goButton: Button = findViewById(R.id.goButton)
