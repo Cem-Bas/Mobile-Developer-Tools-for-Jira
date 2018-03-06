@@ -72,9 +72,9 @@ class IntentHandler : AppCompatActivity() {
 
             } catch (e: Throwable) {
 
-            val intent = intent as Intent
-
-            val imageUri: Uri = intent.extras["imageUri"] as Uri
+            val intent = intent
+            val bundle = intent.extras
+            val imageUri = bundle!!.get(Intent.EXTRA_STREAM) as Uri
 
             Log.d("URI PATH 1", imageUri.toString())
 
@@ -247,28 +247,5 @@ class IntentHandler : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        val cR = mContext?.contentResolver
-
-
-        val uri = data?.data as Uri
-
-        Log.d("URI TEST", uri.toString())
-
-        val intent = Intent(this, IntentHandler::class.java)
-        intent.putExtra("imageUri", uri)
-
-        val type = cR!!.getType(uri)
-
-        Log.d("URI TYPE TEST", type.toString())
-
-        if (type.startsWith("image/")) {
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
-        } else  if (type.startsWith("video/")) {
-            startActivityForResult(intent, PICK_VIDEO_REQUEST)
-        }
-
-    }
 }
