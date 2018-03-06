@@ -2,4 +2,6 @@
     <string name="app_name">Mobile Developer Tools for Jira</string>
     <string name="fakeText">Created by Cem Bas </string>
     <string name="image_ids">http://www.syfy.com/sites/syfy/files/2017/10/rick_and_morty_1.jpg</string>
+    <string name="first_time_user_title">Hello First Time User!</string>
+    <string name="first_time_user_dialog">Please enter your Jira credentials to start.</string>
 </resources>

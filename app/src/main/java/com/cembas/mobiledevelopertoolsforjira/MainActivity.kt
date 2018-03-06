@@ -2,21 +2,20 @@ package com.cembas.mobiledevelopertoolsforjira
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
+import android.support.v7.app.ActionBar
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.daimajia.androidanimations.library.Techniques
 import com.daimajia.androidanimations.library.YoYo
 import com.daimajia.androidviewhover.BlurLayout
-import android.content.ContentResolver
-import android.support.v7.app.ActionBar
-import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +25,15 @@ class MainActivity : AppCompatActivity() {
     val PICK_FILE_REQUEST = 1
     val PICK_VIDEO_REQUEST = 1
 
+    val SHARED_PREF_FILE = "com.cembas.mobiledevelopertoolsforjira.appdata"
+    var preffs: SharedPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        preffs = this.getSharedPreferences(SHARED_PREF_FILE, 0)
+
         mContext = this
+
 
         //check if user already logged in
         // if not show jiraCredRecordActivity
@@ -39,6 +44,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         supportActionBar?.setCustomView(R.layout.abs_layout);
 
+        val jiraAddressPreffs = preffs!!.getString("JiraAddress", "")
+
+        if (jiraAddressPreffs == "") {
+
+            val intent = Intent(mContext, JiraCredentials::class.java)
+            startActivity(intent)
+       } else {
+            return
+        }
 
         var floatingActionButton1 = findViewById<View>(R.id.material_design_floating_action_menu_item1)
         var floatingActionButton2 = findViewById<View>(R.id.material_design_floating_action_menu_item2)

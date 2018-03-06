@@ -8,9 +8,13 @@ import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.afollestad.materialdialogs.MaterialDialog
+
+
 
 class JiraCredentials : AppCompatActivity() {
 
@@ -24,7 +28,6 @@ class JiraCredentials : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
     var jiraAddressEdit: EditText = findViewById(R.id.jiraaddress)
 
     var usernameEdit: EditText = findViewById(R.id.username)
@@ -34,6 +37,19 @@ class JiraCredentials : AppCompatActivity() {
     var saveButton: Button = findViewById(R.id.savecred)
 
         preffs = this.getSharedPreferences(SHARED_PREF_FILE, 0)
+
+        val jiraAddressPreffs = preffs!!.getString("JiraAddress", "")
+
+        if (jiraAddressPreffs == "") {
+            MaterialDialog.Builder(this)
+                    .title(R.string.first_time_user_title)
+                    .content(R.string.first_time_user_dialog)
+                    .positiveText("OK")
+                    .show()
+        } else {
+            return
+        }
+
 
         val jiraAddressSaved: String = preffs!!.getString("JiraAddress", "")
 

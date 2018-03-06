@@ -60,6 +60,8 @@ dependencies {
     compile 'com.daimajia.androidanimations:library:1.1.2@aar'
     compile 'com.daimajia.androidviewhover:library:1.0.4@aar'
 
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
 }
 
 repositories {
